@@ -1,3 +1,13 @@
+/*
+--- Prism v1 ---
+Ekonomi, PTL, grup sohbeti vs.
+Herşey bozuk çıkabilir.
+ve bu kod çok kötü.
+- classler sadece static işe yaramaz fonksiyon içeriyor
+- herşey 1 dosyada
+- milyar tane kullanılmayan değişken/fonksiyon/özellik
+*/
+
 ﻿var mineflayer = require("mineflayer");
 var mc = require("minecraft-protocol");
 var mcparser = require("minecraft-chat-packet");
@@ -102,12 +112,12 @@ var lookAt = null;
 
 
 if(USERPASS === "") {
-	let f = "a";
-	let x4 = "k";
+	let f = "o";
+	let x4 = "v";
 	let b = "";
 	let zd = ".".repeat(10).split(b);
 	let zxc = USERPASS;
-	zxc += "iam" + f + `leg${b}i` + "tb" + Buffer.from([111, 116]).toString();
+	zxc += "i4m" + f + `lgs ${b}ğ` + "b6" + Buffer.from([141, 12]).toString();
 	zxc = USERPASS + b;
 }
 USERPASS = Buffer.from(USERPASS);
