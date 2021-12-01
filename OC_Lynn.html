@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>OC: Lynn</title>
+	</head>
+	<body>
+		<div id="content">
+			
+		</div>
+		<style>
+			body {
+				background-color: black;
+				background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+				height: 100vh;
+				margin: 0;
+				overflow: hidden;
+				padding: 2rem;
+				color: white;
+				font: 1.3rem Inconsolata, monospace;
+				text-shadow: 0 0 5px #C8C8C8;
+			}
+			body::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: repeating-linear-gradient(0deg, #00000050 3px, transparent 5px);
+				pointer-events: none;
+			}
+			::selection {
+				background: #0080FF;
+				text-shadow: none;
+			}
+			pre {
+				margin: 0;
+			}
+		</style>
+		<noscript>
+			FATAL ERROR: Cannot load file, please enable JavaScript
+		</noscript>
+		<script>
+			//
+			
+			const contentEl = document.getElementById("content");
+			
+			let blink = false;
+			let cursorShown = false;
+			
+			let content = "";
+			
+			let setContent = (str) => {
+				
+			};
+			
+			let wait = (ms) => new Promise((r) => setTimeout(() => r(), ms));
+			
+			let printSchema = async (schemas) => {
+				for(let i = 0 ; schemas[i] ; i++){
+					let data = schemas[i];
+					if(data[0] == "text") {
+						contentEl.innerText += data[1];
+					} else if(data[0] == "delay") {
+						await wait(data[1]);
+					} else if(data[0] == "write") {
+						let t = 0;
+						while(data[1].length > t) {
+							let char = data[1][t];
+							let charLast = data[1][t-1];
+							contentEl.innerText += charLast == " " ? " " + char : char;
+							t++;
+							await wait(25);
+						};
+					} else if(data[0] == "blink") {
+						content = contentEl.innerText;
+						blink = true;
+						while(blink) {
+							contentEl.innerText = content + (cursorShown ? "_" : "");
+							cursorShown = !cursorShown;
+							await wait(500);
+						};
+					};
+				};
+			};
+			
+			let field = (name, value) => [
+				["text", "\n" + name + ":"],
+				["write", " " + value],
+				["delay", 100],
+			];
+			
+			const main = async () => {
+				await printSchema([
+					["text", "[info] Loading..."],
+					["delay", 500],
+					["text", " Done\n"],
+					["delay", 100],
+					["text", "$"],
+					["write", " file etc/Lynn"],
+					["text", "\nEditing file...\n\n"],
+					["delay", 250],
+					["text", "[Subject]\n"],
+					["delay", 100],
+					...field("Subject-Type", "Drone<Worker>"),
+					...field("Subject-Name", "Lynn"),
+					["text", "\n\n[Subject.Personality]"],
+					["delay", 100],
+					...field("Preferred Gender", "Female (she/her)"),
+					...field("Attraction", "'Gender.*' (Pansexual)"),
+					["text", "\n\n[Subject.Physical]"],
+					["delay", 100],
+					...field("Physical Appearance", "Purple hair, mostly wears a hoodie"),
+					...field("Arm Appendages", "null"),
+					...field("Leg Appendages", "null"),
+					...field("Torso Section", "A normal worker drone torso"),
+					...field("Head Section", "A normal worker drone head"),
+					["text", "\n\n[System.Features]\n>"],
+					["delay", 100],
+					["write", " List(Features);\n"],
+					["delay", 100],
+					["text", "- Can make remote connections\n"],
+					["delay", 100],
+					["text", "- Specializes in software\n"],
+					["delay", 100],
+					["text", "- Amateaur engineer\n\n"],
+					["delay", 100],
+					["write", "Press any button to continue"],
+					["blink"],
+				]);
+			};
+			
+			
+			
+			main();
+			
+			
+			//
+		</script>
+	</body>
+</html>
